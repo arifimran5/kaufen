@@ -73,3 +73,9 @@
 	padding: 1rem;
 	overflow-y: auto;
 }
+
+@media (max-width: 800px) {
+  .sidebar {
+    max-width: 90% !important; /* Override inline styles */
+  }
+}
