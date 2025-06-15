@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f4f4;
+  border-bottom: 5px solid #000;
+  border-right: 5px solid #000;
+  padding: 1rem 2rem;
+  margin: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header h1 {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #343a40;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.header nav button {
+  background-color: white;
+  color: #000;
+  border: 2px solid #000;
+  border-right: 4px solid #000;
+  border-bottom: 4px solid #000;
+  padding: 8px 16px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.1s ease;
+}
+
+.header nav button:hover {
+  background-color: #000;
+  color: white;
+  border-right: 4px solid #000;
+  border-bottom: 4px solid #000;
+  transform: translate(2px, 2px);
+}
+
+.header nav button:active {
+  background-color: #343a40;
+  transform: translate(2px, 2px);
+}

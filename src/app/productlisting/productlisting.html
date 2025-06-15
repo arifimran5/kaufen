@@ -1,0 +1,31 @@
+<section class="product_listing">
+	@if (productResource.isLoading()) {
+	@for(item of [1,2,3,4,5,6,7,8,9,10]; track item){
+	<app-product-skeleton />
+	}
+	}
+
+	@if (productResource.error()) {
+	<div class="error">
+		<h2>Something went wrong</h2>
+		<p>{{productResource.error()}}</p>
+	</div>
+	}
+
+
+	@if(productResource.value()){
+	<div class="product" *ngFor="let p of productResource.value()">
+		<div class="product_image_container">
+			<img [ngSrc]="p.images[0]" alt="{{p.title}}" width="250" height="250" />
+		</div>
+		<h2>{{p.title}}</h2>
+		<p [title]="p.description">{{p.description}}</p>
+		<div class="product_price_cart">
+			<b>{{p.price | currency}}</b>
+			<button (click)="addToCart(p.id)" [class.in-cart]="isInCart(p.id)">
+				{{isInCart(p.id) ? 'Go to Cart' : 'Add to Cart'}}
+			</button>
+		</div>
+	</div>
+	}
+</section>

@@ -1,59 +1,82 @@
-# Signaldemo
+# Kaufen - Angular 18+ Shopping Cart Demo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+A modern shopping cart application showcasing the latest Angular features and best practices, particularly focusing on the new Signals API and reactive patterns.
 
-## Development server
+## Key Features
 
-To start a local development server, run:
+- 🎯 Built with Angular 18+
+- 📡 Uses the new Resource API for data fetching
+- 💡 Signal-based state management
+- 🎨 Brutalist design system
+- 🛒 Shopping cart functionality
+- 🔄 Reactive UI updates
 
-```bash
-ng serve
+## Technical Highlights
+
+### Signals
+
+- Cart state management using `signal()` and `computed()`
+- Reactive product listing with signal-based data store
+- Two-way state synchronization with localStorage
+
+### Resource API
+
+```typescript
+productResource = resource({
+  loader: async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.products;
+  }
+}).asReadonly();
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Modern Angular Patterns
 
-## Code scaffolding
+- Standalone Components
+- Input Signals (`input()`)
+- Output Events (`output()`)
+- Dependency Injection with `inject()`
+- Template Control Flow (`@if`, `@for`)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Component Architecture
 
-```bash
-ng generate component component-name
+- Reusable Sidebar Component
+- Skeleton Loading UI
+- Cart Service with Signal-based state
+- Product Service with Resource API
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── cart/                 # Cart components and service
+│   ├── productlisting/       # Product listing components
+│   ├── shared/
+│   │   ├── sidebar/         # Reusable sidebar component
+│   │   └── skeletonloader/  # Loading skeleton components
+│   └── app.ts               # Root component
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+## Learning Points
 
-## Building
+- Using Signals for state management instead of BehaviorSubject
+- Resource API for data fetching instead of HttpClient
+- New template syntax for control flow
+- Standalone components and simplified imports
+- Signal-based inputs instead of traditional @Input()
+- Modern dependency injection with inject()
 
-To build the project run:
+## Getting Started
 
-```bash
-ng build
-```
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run the development server: `ng serve`
+4. Open browser at `http://localhost:4200`
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Requirements
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Node.js 18+
+- Angular CLI 18+

@@ -1,0 +1,33 @@
+<section class="cart-container">
+	@if (cartItems().length === 0) {
+	<div class="empty-cart">
+		<h2>Your cart is empty</h2>
+		<p>Add some products to your cart to see them here.</p>
+	</div>
+	} @else {
+	<div class="cart-items">
+		@for(item of cartItems(); track item.id) {
+		<div class="cart-item">
+			<img [src]="item.product.thumbnail" [alt]="item.product.title" width="80" height="80" />
+			<div class="item-details">
+				<h3>{{ item.product.title }}</h3>
+				<p class="price">{{ item.product.price | currency }}</p>
+			</div>
+			<div class="item-quantity">
+				<button class="quantity-btn" (click)="cartService.decrementCartItem(item.id)">-</button>
+				<span class="quantity-display">{{ item.quantity }}</span>
+				<button class="quantity-btn" (click)="cartService.incrementCartItem(item.id)">+</button>
+			</div>
+		</div>
+		}
+	</div>
+
+	<div class="cart-summary">
+		<div class="total">
+			<span>Total:</span>
+			<span class="total-amount">{{ totalPrice() | currency }}</span>
+		</div>
+		<button class="checkout-btn">Proceed to Checkout</button>
+	</div>
+	}
+</section>
