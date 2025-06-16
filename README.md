@@ -1,5 +1,7 @@
 # Kaufen - Angular 18+ Shopping Cart Demo
 
+Live - https://kauf.netlify.app
+
 A modern shopping cart application showcasing the latest Angular features and best practices, particularly focusing on the new Signals API and reactive patterns.
 
 ## Key Features
