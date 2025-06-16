@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
 
 @Injectable({
 	providedIn: 'root',
@@ -8,8 +8,14 @@ export class CartService {
 	private cartItems = signal<Map<number, number>>(this.loadCartFromStorage());
 
 	constructor() {
-		// Initialize cart from localStorage when service is created
-		this.loadCartFromStorage();
+		// effect to automatically save cart changes to localStorage
+		effect(() => {
+			const currentCart = this.cartItems();
+			localStorage.setItem(
+				this.STORAGE_KEY,
+				JSON.stringify(Array.from(currentCart.entries()))
+			);
+		});
 	}
 
 	private loadCartFromStorage(): Map<number, number> {
@@ -42,7 +48,6 @@ export class CartService {
 		const currentCart = new Map(this.cartItems());
 		currentCart.set(productId, 1);
 		this.cartItems.set(currentCart);
-		this.saveCartToStorage(currentCart);
 	}
 
 	updateCartItem(productId: number, quantity: number): void {
@@ -50,7 +55,6 @@ export class CartService {
 		if (currentCart.has(productId)) {
 			currentCart.set(productId, quantity);
 			this.cartItems.set(currentCart);
-			this.saveCartToStorage(currentCart);
 		}
 	}
 
@@ -60,7 +64,6 @@ export class CartService {
 			const currentQuantity = currentCart.get(productId) || 0;
 			currentCart.set(productId, currentQuantity + 1);
 			this.cartItems.set(currentCart);
-			this.saveCartToStorage(currentCart);
 		}
 	}
 
@@ -74,7 +77,6 @@ export class CartService {
 				currentCart.delete(productId);
 			}
 			this.cartItems.set(currentCart);
-			this.saveCartToStorage(currentCart);
 		}
 	}
 
@@ -82,7 +84,6 @@ export class CartService {
 		const currentCart = new Map(this.cartItems());
 		currentCart.delete(productId);
 		this.cartItems.set(currentCart);
-		this.saveCartToStorage(currentCart);
 	}
 
 	clearCart(): void {
